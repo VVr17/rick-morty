@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import CharactersList from "components/CharactersList";
-import Title from "components/Title";
-import Search from "components/UI-Kit/Search";
-import Loader from "components/Loader";
 import { useLocation, useSearchParams } from "react-router-dom";
 import { getCharacters } from "api/getCharacters";
-import { toast } from "react-toastify";
+import CharactersList from "components/CharactersList";
+import Loader from "components/Loader";
+import Search from "components/UI-Kit/Search";
+import Title from "components/Title";
 
 const Characters = () => {
   const [characters, setCharacters] = useState(null);

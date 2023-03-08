@@ -6,16 +6,20 @@ import { BiLeftArrowAlt } from "react-icons/bi";
 import { Box } from "components/Box/Box";
 import Container from "components/Container";
 import { getUserData } from "api/googleapi";
-import { LinkStyled, RegisterButtonStyled } from "./Header.styled";
+import { LinkStyled, RegisterButtonStyled, UserData } from "./Header.styled";
+import { useUser } from "contexts/auth/authContext";
 
 const Header = () => {
+  const { isLoggedIn, user, onLogIn, onLogOut } = useUser();
   const location = useLocation();
   const isDetailsPage = location.pathname !== "/";
 
   const googleLogin = useGoogleLogin({
     onSuccess: async (codeResponse) => {
       const response = await getUserData(codeResponse.access_token);
-      console.log("response", response);
+      // console.log("response", response.data);
+      const { email, name } = response.data;
+      onLogIn({ email, name });
     },
     onError: (error) => {
       console.log("Login Failed:", error);
@@ -33,14 +37,34 @@ const Header = () => {
             </LinkStyled>
           )}
 
-          <RegisterButtonStyled
-            onClick={() => {
-              googleLogin();
-            }}
-          >
-            <FcGoogle />
-            Sign in
-          </RegisterButtonStyled>
+          {!isLoggedIn ? (
+            <RegisterButtonStyled
+              onClick={() => {
+                googleLogin();
+              }}
+            >
+              <FcGoogle />
+              Sign in
+            </RegisterButtonStyled>
+          ) : (
+            <Box
+              display="flex"
+              flexDirection="column"
+              alignItems="flex-end"
+              gridGap="8px"
+              justifyContent="flex-end"
+              flexGrow="1"
+            >
+              <UserData>{user.email}</UserData>
+              <button
+                onClick={() => {
+                  onLogOut();
+                }}
+              >
+                Log out
+              </button>
+            </Box>
+          )}
         </Box>
       </Container>
     </header>

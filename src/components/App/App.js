@@ -3,7 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { GlobalStyle } from "./App.styled";
 import Loader from "components/Loader";
-import { Characters, Details, Layout, Register } from "./lazyLoading";
+import { Characters, Details, Layout } from "./lazyLoading";
 
 const App = () => {
   return (

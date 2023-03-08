@@ -1,9 +1,8 @@
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { getCharacterById } from "api/getCharacterById";
-import { Box } from "components/Box/Box";
 import CharacterInfo from "components/CharacterInfo";
 import Loader from "components/Loader";
-import React, { useEffect, useRef, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
 import {
   ImageStyled,
   InformationStyled,

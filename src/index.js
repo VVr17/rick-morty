@@ -5,6 +5,7 @@ import App from "./components/App";
 import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import { theme } from "./constants/theme";
+import AuthProvider from "./contexts/auth/Provider";
 import "react-toastify/dist/ReactToastify.css";
 import "./index.css";
 
@@ -14,7 +15,9 @@ root.render(
     <BrowserRouter>
       <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
         <ThemeProvider theme={theme}>
-          <App />
+          <AuthProvider>
+            <App />
+          </AuthProvider>
         </ThemeProvider>
       </GoogleOAuthProvider>
     </BrowserRouter>

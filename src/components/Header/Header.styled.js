@@ -1,3 +1,4 @@
+import { theme } from "constants/theme";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
@@ -5,8 +6,7 @@ export const LinkStyled = styled(Link)`
   display: flex;
   justify-content: center;
   align-items: center;
-  /* margin-left: ${({ type }) => (type === "register" ? "auto" : "0")}; */
-
+  margin-right: 4px;
   color: ${({ theme }) => theme.colors.black};
   text-transform: uppercase;
   font-weight: ${({ theme }) => theme.fontWeight.bold};
@@ -55,5 +55,18 @@ export const RegisterButtonStyled = styled.button`
     width: 24px;
     height: 24px;
     margin-right: 6px;
+  }
+`;
+
+export const UserData = styled.p`
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  max-width: 160px;
+  overflow-x: hidden;
+  font-size: 12px;
+
+  ${theme.mq.desktop} {
+    font-size: 16px;
   }
 `;

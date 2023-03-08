@@ -1,4 +1,4 @@
-import { getAllCharacters } from './getAllCharacters';
-import { getCharacterByName } from './getCharacterByName';
+import { getCharacters } from "./getCharacters";
+import { getCharacterByName } from "./getCharacterByName";
 
-export { getAllCharacters, getCharacterByName };
+export { getCharacters, getCharacterByName };

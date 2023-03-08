@@ -1,8 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Card from './Card';
-import { Link } from 'react-router-dom';
-import { ListItemStyled, ListStyled } from './CharactersList.styled';
+import React from "react";
+import PropTypes from "prop-types";
+import Card from "./Card";
+import { Link } from "react-router-dom";
+import { ListItemStyled, ListStyled } from "./CharactersList.styled";
 
 const CharactersList = ({ characters, previousLocation }) => {
   return (

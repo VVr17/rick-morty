@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useLocation, useSearchParams } from "react-router-dom";
-import { getCharacters } from "api/getCharacters";
 import CharactersList from "components/CharactersList";
 import Loader from "components/Loader";
 import Search from "components/UI-Kit/Search";
@@ -8,39 +7,21 @@ import Title from "components/Title";
 import Paginate from "components/Pagination/Pagination";
 import { topScroll } from "helpers/topScroll";
 import ErrorMessage from "components/ErrorMessage";
+import { useSortedCharacters } from "hooks/useSortedCharacters";
 
 const Characters = () => {
   const location = useLocation();
+
   // to get search query and handle search
   const [searchParams, setSearchParams] = useSearchParams();
-
-  // to define Url search params
   const query = searchParams.get("name");
   const pageUrl = searchParams.get("page");
+
+  const [page, setPage] = useState(+pageUrl || 1);
   const [inputValue, setInputValue] = useState(query || "");
 
-  // state for characters
-  const [characters, setCharacters] = useState(null);
-  const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
-
-  //state for pagination
-  const [totalPages, setTotalPages] = useState(1);
-  const [page, setPage] = useState(+pageUrl || 1);
-
-  // to fetch characters due to page or query "name"
-  useEffect(() => {
-    const getData = async () => {
-      setIsLoading(true);
-      const { data, error, pages } = await getCharacters(query, page);
-      setCharacters(data);
-      setError(error);
-      setTotalPages(pages);
-      setIsLoading(false);
-    };
-
-    getData();
-  }, [query, page]);
+  const { data, error, isFetching } = useSortedCharacters({ query, page }); // get sorted char
+  const totalPages = data?.pages || 1;
 
   // submit Search to request Api
   const onSubmit = (event) => {
@@ -86,23 +67,26 @@ const Characters = () => {
         handleChange={handleSearchChange}
         value={inputValue}
       />
-      {isLoading && <Loader />}
+      {isFetching && <Loader />}
       {error && <ErrorMessage />}
 
-      {characters?.length > 0 && (
+      {data && !error && data.characters?.length > 0 && (
         <CharactersList
-          characters={characters}
+          characters={data.characters}
           previousLocation={location.pathname + location.search}
         />
       )}
 
-      {totalPages > 1 && !isLoading && characters?.length > 0 && (
-        <Paginate
-          total={totalPages}
-          handlePageClick={handlePageClick}
-          page={page}
-        />
-      )}
+      {totalPages > 1 &&
+        !isFetching &&
+        data.characters?.length > 0 &&
+        !error && (
+          <Paginate
+            total={totalPages}
+            handlePageClick={handlePageClick}
+            page={page}
+          />
+        )}
     </>
   );
 };

@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
 import CharacterInfo from "components/CharacterInfo";
-import { getCharacterById } from "api/getCharacterById";
 import Loader from "components/Loader";
 import {
   ImageStyled,
@@ -10,27 +9,17 @@ import {
   WrapperStyled,
 } from "./Details.styled";
 import ErrorMessage from "components/ErrorMessage";
+import { useGetCharacterByIdQuery } from "redux/api/characterApi";
 
 const Details = () => {
   const { characterId } = useParams(); // to get Id from URL params
-  const [character, setCharacter] = useState(null);
-  const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const {
+    data: character,
+    isFetching,
+    error,
+  } = useGetCharacterByIdQuery(characterId);
 
-  useEffect(() => {
-    const getCharacterDetails = async () => {
-      setIsLoading(true);
-      const { data, error } = await getCharacterById(characterId);
-      setCharacter(data);
-
-      setError(error);
-      setIsLoading(false);
-    };
-
-    getCharacterDetails();
-  }, [characterId]);
-
-  if (isLoading) {
+  if (isFetching) {
     return <Loader />;
   }
 

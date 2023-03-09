@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import Container from "components/Container";
 import { MyPaginate, Prev, Next } from "./Pagination.styled";
 import { useWindowSize } from "hooks/useWindowSize";
-// import ReactPaginate from "react-paginate";
 
 const Paginate = ({ total, handlePageClick, page }) => {
   const { isDesktop } = useWindowSize();

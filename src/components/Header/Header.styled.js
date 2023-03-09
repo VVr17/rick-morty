@@ -1,6 +1,6 @@
-import { theme } from "constants/theme";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { theme } from "constants/theme";
 
 export const LinkStyled = styled(Link)`
   display: flex;
@@ -30,16 +30,15 @@ export const RegisterButtonStyled = styled.button`
   align-items: center;
   justify-content: center;
   margin-left: auto;
-  border: none;
+  padding-left: 28px;
+  padding-right: 28px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   font-family: inherit;
   font-size: inherit;
   font-weight: ${({ theme }) => theme.fontWeight.bold};
   color: ${({ theme }) => theme.colors.mainText};
   cursor: pointer;
-  padding-left: 28px;
-  padding-right: 28px;
-  padding-top: 10px;
-  padding-bottom: 10px;
   border-radius: 40px;
   border: 1px solid ${({ theme }) => theme.colors.accent};
   background-color: transparent;

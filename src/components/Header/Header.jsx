@@ -6,8 +6,8 @@ import { BiLeftArrowAlt } from "react-icons/bi";
 import { Box } from "components/Box/Box";
 import Container from "components/Container";
 import { getUserData } from "api/googleapi";
-import { LinkStyled, RegisterButtonStyled, UserData } from "./Header.styled";
 import { useUser } from "contexts/auth/authContext";
+import { LinkStyled, RegisterButtonStyled, UserData } from "./Header.styled";
 
 const Header = () => {
   const { isLoggedIn, user, onLogIn, onLogOut } = useUser();

@@ -1,15 +1,15 @@
-import { theme } from 'constants/theme';
-import styled from 'styled-components';
+import styled from "styled-components";
+import { theme } from "constants/theme";
 
 export const WrapperStyled = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: 0 auto;
-  color: ${({ theme }) => theme.colors.detailsMainText};
   line-height: 1.5;
   font-weight: ${({ theme }) => theme.fontWeight.bold};
   font-size: ${({ theme }) => theme.fontSizes.s};
+  color: ${({ theme }) => theme.colors.detailsMainText};
 
   ${theme.mq.desktop} {
     max-width: 413px;
@@ -17,9 +17,9 @@ export const WrapperStyled = styled.div`
 `;
 
 export const ImageStyled = styled.img`
-  margin-bottom: 34px;
   width: 150px;
   height: 148px;
+  margin-bottom: 34px;
   border-radius: 150px;
   border: 5px solid ${({ theme }) => theme.colors.imageBorder};
 
@@ -53,7 +53,7 @@ export const InformationStyled = styled.p`
   color: ${({ theme }) => theme.colors.information};
 
   ${theme.mq.desktop} {
-    margin-bottom: 48px;
     align-self: center;
+    margin-bottom: 48px;
   }
 `;

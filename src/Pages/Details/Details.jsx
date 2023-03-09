@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getCharacterById } from "api/getCharacterById";
 import CharacterInfo from "components/CharacterInfo";
+import { getCharacterById } from "api/getCharacterById";
 import Loader from "components/Loader";
 import {
   ImageStyled,
@@ -11,7 +11,7 @@ import {
 } from "./Details.styled";
 
 const Details = () => {
-  const params = useParams(); // from <Route path="movies/:movieId" element={<MovieDetails />}>
+  const { characterId } = useParams(); // to get Id from URL params
   const [character, setCharacter] = useState(null);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -19,7 +19,7 @@ const Details = () => {
   useEffect(() => {
     const getCharacterDetails = async () => {
       setIsLoading(true);
-      const { data, error } = await getCharacterById(params.characterId);
+      const { data, error } = await getCharacterById(characterId);
       const {
         image,
         name,
@@ -45,7 +45,7 @@ const Details = () => {
     };
 
     getCharacterDetails();
-  }, [params.characterId]);
+  }, [characterId]);
 
   if (isLoading) {
     return <Loader />;

@@ -1,7 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import Card from "./Card";
-import { Link } from "react-router-dom";
 import { ListItemStyled, ListStyled } from "./CharactersList.styled";
 
 const CharactersList = ({ characters, previousLocation }) => {

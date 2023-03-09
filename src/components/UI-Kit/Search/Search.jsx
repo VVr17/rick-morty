@@ -1,12 +1,18 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { ButtonSubmit, FormStyled } from './Search.styled';
-import { BsSearch } from 'react-icons/bs';
+import React from "react";
+import PropTypes from "prop-types";
+import { BsSearch } from "react-icons/bs";
+import { ButtonSubmit, FormStyled } from "./Search.styled";
 
-const Search = ({ onSubmit }) => {
+const Search = ({ onSubmit, handleChange, value }) => {
   return (
     <FormStyled onSubmit={onSubmit}>
-      <input name="query" type="text" placeholder="Filter by name..." />
+      <input
+        name="query"
+        type="text"
+        placeholder="Filter by name..."
+        onChange={handleChange}
+        value={value}
+      />
       <ButtonSubmit type="submit" aria-label="search submit">
         <BsSearch />
       </ButtonSubmit>
@@ -16,6 +22,8 @@ const Search = ({ onSubmit }) => {
 
 Search.propTypes = {
   onSubmit: PropTypes.func.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  value: PropTypes.string.isRequired,
 };
 
 export default Search;

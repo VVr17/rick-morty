@@ -1,9 +1,9 @@
 import React, { Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import { GlobalStyle } from "./App.styled";
 import Loader from "components/Loader";
 import { Characters, Details, Layout } from "./lazyLoading";
+import { GlobalStyle } from "./App.styled";
 
 const App = () => {
   return (

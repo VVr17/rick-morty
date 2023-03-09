@@ -1,11 +1,11 @@
-import PuffLoader from 'react-spinners/PuffLoader';
-import PropTypes from 'prop-types';
-import React from 'react';
-import { theme } from 'constants/theme';
-import { Wrapper } from './Loader.styled';
+import React from "react";
+import PropTypes from "prop-types";
+import PuffLoader from "react-spinners/PuffLoader";
+import { theme } from "constants/theme";
+import { Wrapper } from "./Loader.styled";
 
 const override = {
-  display: 'block',
+  display: "block",
   margin: `20px auto`,
 };
 

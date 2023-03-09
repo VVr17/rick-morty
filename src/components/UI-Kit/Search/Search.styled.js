@@ -1,5 +1,5 @@
-import { theme } from 'constants/theme';
-import styled from 'styled-components';
+import styled from "styled-components";
+import { theme } from "constants/theme";
 
 export const FormStyled = styled.form`
   width: 100%;
@@ -17,9 +17,9 @@ export const FormStyled = styled.form`
     border-radius: 8px;
     font-size: inherit;
     font-weight: ${({ theme }) => theme.fontWeight.medium};
-    color: inherit;
     font-family: inherit;
     line-height: 1.5;
+    color: inherit;
 
     ::placeholder {
       ${({ theme }) => theme.colors.placeholder};
@@ -32,16 +32,16 @@ export const ButtonSubmit = styled.button`
   top: 50%;
   left: 16px;
   transform: translate(0, -50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   margin: 0;
   padding: 4px;
   border: none;
   font: inherit;
   cursor: pointer;
   background-color: transparent;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  color: ${p => p.theme.colors.placeholder};
+  color: ${(p) => p.theme.colors.placeholder};
   transition: color ${({ theme }) => theme.transitionTiming},
     opacity ${({ theme }) => theme.transitionTiming};
   outline: none;

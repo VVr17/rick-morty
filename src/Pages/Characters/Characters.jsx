@@ -7,6 +7,7 @@ import Search from "components/UI-Kit/Search";
 import Title from "components/Title";
 import Paginate from "components/Pagination/Pagination";
 import { topScroll } from "helpers/topScroll";
+import ErrorMessage from "components/ErrorMessage";
 
 const Characters = () => {
   const location = useLocation();
@@ -85,13 +86,9 @@ const Characters = () => {
         handleChange={handleSearchChange}
         value={inputValue}
       />
-
       {isLoading && <Loader />}
-      {error && (
-        <p>
-          Oops, something went wrong. Please, try again or change your request
-        </p>
-      )}
+      {error && <ErrorMessage />}
+
       {characters?.length > 0 && (
         <CharactersList
           characters={characters}

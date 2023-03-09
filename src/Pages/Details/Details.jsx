@@ -9,6 +9,7 @@ import {
   Title,
   WrapperStyled,
 } from "./Details.styled";
+import ErrorMessage from "components/ErrorMessage";
 
 const Details = () => {
   const { characterId } = useParams(); // to get Id from URL params
@@ -20,25 +21,7 @@ const Details = () => {
     const getCharacterDetails = async () => {
       setIsLoading(true);
       const { data, error } = await getCharacterById(characterId);
-      const {
-        image,
-        name,
-        gender,
-        status,
-        origin: { name: origin },
-        type,
-        species,
-      } = data;
-
-      setCharacter({
-        image,
-        name,
-        gender,
-        status,
-        origin,
-        type,
-        species,
-      });
+      setCharacter(data);
 
       setError(error);
       setIsLoading(false);
@@ -55,7 +38,7 @@ const Details = () => {
 
   return (
     <>
-      {error && <p>Oops, something went wrong. Please, try again</p>}
+      {error && <ErrorMessage />}
       {character && (
         <WrapperStyled>
           <ImageStyled src={image} alt={name} width="150px" height="148px" />

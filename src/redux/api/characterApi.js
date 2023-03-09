@@ -1,5 +1,5 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
-import { BASE_URL, CHARACTER_URL, TAGS_TYPES } from "constants/api";
+import { CHARACTER_URL, TAGS_TYPES } from "constants/api";
 import baseQuery from "redux/baseQuery";
 
 export const characterApi = createApi({
@@ -10,8 +10,8 @@ export const characterApi = createApi({
     getCharacters: builder.query({
       query: ({ query, page }) =>
         query
-          ? `${BASE_URL}${CHARACTER_URL}?page=${page}&name=${query}`
-          : `${BASE_URL}${CHARACTER_URL}?page=${page}`,
+          ? `${CHARACTER_URL}?page=${page}&name=${query}`
+          : `${CHARACTER_URL}?page=${page}`,
       providesTags: [TAGS_TYPES.characters],
       transformResponse: (response) => ({
         characters: response.results,
@@ -19,7 +19,7 @@ export const characterApi = createApi({
       }),
     }),
     getCharacterById: builder.query({
-      query: (id) => `${BASE_URL}${CHARACTER_URL}/${id}`,
+      query: (id) => `${CHARACTER_URL}/${id}`,
       transformResponse: (response) => {
         const {
           image,

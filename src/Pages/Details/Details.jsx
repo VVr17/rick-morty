@@ -1,15 +1,15 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import CharacterInfo from "components/CharacterInfo";
+import ErrorMessage from "components/ErrorMessage";
 import Loader from "components/Loader";
+import { useGetCharacterByIdQuery } from "redux/api/characterApi";
 import {
   ImageStyled,
   InformationStyled,
   Title,
   WrapperStyled,
 } from "./Details.styled";
-import ErrorMessage from "components/ErrorMessage";
-import { useGetCharacterByIdQuery } from "redux/api/characterApi";
 
 const Details = () => {
   const { characterId } = useParams(); // to get Id from URL params

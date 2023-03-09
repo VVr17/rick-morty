@@ -1,20 +1,23 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { FcGoogle } from "react-icons/fc";
 import { useGoogleLogin } from "@react-oauth/google";
-import { getUserData } from "api/googleapi";
 import { Box } from "components/Box/Box";
 import Button from "components/UI-Kit/Button";
-import { useUser } from "contexts/auth/authContext";
+import { getUserData } from "api/googleapi";
+import { login, logout } from "redux/user/userSlice";
+import { selectUserState } from "redux/user/userSelectors";
 import { UserData } from "./AuthMenu.styled";
 
 const AuthMenu = () => {
-  const { isLoggedIn, user, onLogIn, onLogOut } = useUser();
+  const dispatch = useDispatch();
+  const { user, isLoggedIn } = useSelector(selectUserState);
 
   const googleLogin = useGoogleLogin({
     onSuccess: async (codeResponse) => {
       const response = await getUserData(codeResponse.access_token);
       const { email, given_name } = response.data;
-      onLogIn({ email, name: given_name });
+      dispatch(login({ email, name: given_name }));
     },
     onError: (error) => {
       console.log("Login Failed:", error);
@@ -37,7 +40,7 @@ const AuthMenu = () => {
           <UserData>{user.name}</UserData>
           <Button
             onClick={() => {
-              onLogOut();
+              dispatch(logout());
             }}
           >
             Log out

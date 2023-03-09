@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 import { useLocation, useSearchParams } from "react-router-dom";
 import CharactersList from "components/CharactersList";
+import ErrorMessage from "components/ErrorMessage";
 import Loader from "components/Loader";
 import Search from "components/UI-Kit/Search";
 import Title from "components/Title";
 import Paginate from "components/Pagination/Pagination";
 import { topScroll } from "helpers/topScroll";
-import ErrorMessage from "components/ErrorMessage";
 import { useSortedCharacters } from "hooks/useSortedCharacters";
 
 const Characters = () => {
   const location = useLocation();
 
-  // to get search query and handle search
+  // to get Url search params
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get("name");
   const pageUrl = searchParams.get("page");
@@ -33,11 +33,11 @@ const Characters = () => {
     if (page > 1) setPage(1);
 
     if (searchParams.has("name") && !queryTrimmed) {
-      setSearchParams({ page: 1 });
+      setSearchParams();
       return;
     }
 
-    setSearchParams({ page: 1, name: queryTrimmed });
+    setSearchParams({ name: queryTrimmed });
   };
 
   // handle query search
@@ -46,12 +46,13 @@ const Characters = () => {
   };
 
   // handle pagination
-  const handlePageClick = (e) => {
-    const pageToTurn = e.selected + 1;
+  const handlePageClick = (event) => {
+    const pageToTurn = event.selected + 1;
     setPage(pageToTurn);
 
     if (query) {
       setSearchParams({ page: pageToTurn, name: query });
+      topScroll();
       return;
     }
 
@@ -70,23 +71,20 @@ const Characters = () => {
       {isFetching && <Loader />}
       {error && <ErrorMessage />}
 
-      {data && !error && data.characters?.length > 0 && (
+      {data?.characters && !error && (
         <CharactersList
           characters={data.characters}
           previousLocation={location.pathname + location.search}
         />
       )}
 
-      {totalPages > 1 &&
-        !isFetching &&
-        data.characters?.length > 0 &&
-        !error && (
-          <Paginate
-            total={totalPages}
-            handlePageClick={handlePageClick}
-            page={page}
-          />
-        )}
+      {totalPages > 1 && !error && (
+        <Paginate
+          total={totalPages}
+          handlePageClick={handlePageClick}
+          page={page}
+        />
+      )}
     </>
   );
 };

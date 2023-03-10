@@ -6,6 +6,7 @@ import Loader from "components/Loader";
 import Search from "components/UI-Kit/Search";
 import Title from "components/Title";
 import Paginate from "components/Pagination/Pagination";
+import ScrollUpButton from "components/UI-Kit/ScrollUpButton";
 import { topScroll } from "helpers/topScroll";
 import { useSortedCharacters } from "hooks/useSortedCharacters";
 
@@ -85,6 +86,7 @@ const Characters = () => {
           page={page}
         />
       )}
+      <ScrollUpButton />
     </>
   );
 };

@@ -10,7 +10,6 @@ const Title = () => {
 
   return (
     <Box maxWidth={["312px", "312px", "600px"]} mx="auto" mb="16px">
-      <TitleStyled>Rick and Morty</TitleStyled>
       <img
         src={isMobile ? mobileImg : desktopImg}
         alt="rick and morty"

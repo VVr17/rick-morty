@@ -17,7 +17,7 @@ const App = () => {
         </Routes>
       </Suspense>
       <GlobalStyle />
-      <ToastContainer autoClose={3000} theme="colored" />
+      <ToastContainer autoClose={3000} limit={1} />
     </>
   );
 };

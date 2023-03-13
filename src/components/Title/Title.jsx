@@ -3,7 +3,6 @@ import { Box } from "components/Box/Box";
 import mobileImg from "assets/images/title-mobile.png";
 import desktopImg from "assets/images/title-desktop.png";
 import { useWindowSize } from "hooks/useWindowSize";
-import { TitleStyled } from "./Title.styled";
 
 const Title = () => {
   const { isMobile } = useWindowSize();
